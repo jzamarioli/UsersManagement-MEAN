@@ -1,0 +1,71 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left">{{updating ? 'Update user' : 'New user'}}</h4>        
+    <button type="button" class="close pull-right" aria-label="Close" (click)="sendMessage('closepopup', null)">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<div class="modal-body">
+    <form novalidate [formGroup]="userform"> 
+        <!-- Id  -->    
+        <input formControlName="_id" style="display:none">
+
+        <!-- Name -->
+        <div class="form-group">
+        <label for="name">Name</label>
+        <input formControlName="name" class="form-control">
+        </div> 
+        <div class="alert alert-danger" *ngIf="userform.get('name').touched && !userform.get('name').valid">
+            Name is required and needs to contain at least 5 characters
+        </div>
+
+        <!-- Username -->
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input formControlName="username" class="form-control">  
+        </div>         
+        <div class="alert alert-danger" *ngIf="userform.get('username').touched && !userform.get('username').valid">
+            Username  is required and needs to contain at least 3 characters
+        </div>
+
+        <!-- Password -->
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" formControlName="password" class="form-control">  
+        </div> 
+        <div class="alert alert-danger" *ngIf="userform.get('password').touched && !userform.get('password').valid">
+            Password is required
+        </div>   
+        
+        <!-- E-mail -->
+        <div class="form-group">
+            <label for="email">E-mail</label>
+            <input formControlName="email" type="email" class="form-control">  
+        </div>
+        <div class="alert alert-danger" *ngIf="userform.get('email').touched && userform.get('email').dirty && !userform.get('email').valid">
+            Invalid e-mail
+        </div>  
+
+        <!-- Role -->
+        <div class="form-group">
+            <label for="role">Role</label>
+            <input formControlName="role" class="form-control">  
+        </div> 
+        <div class="alert alert-danger" *ngIf="userform.get('role').touched && !userform.get('role').valid">
+            Role is required
+        </div>           
+        
+        <br />
+        <div class="alert alert-danger" *ngIf="errors">            
+            {{errors}}
+        </div>  
+    </form>        
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-primary" [disabled]="!userform.valid" (click)="saveUser(userform.value)">{{updating ? 'Update' : 'Save'}}</button>
+        <button class="btn btn-default" (click)="sendMessage('closepopup', null)">Close</button>
+</div>
+
+
+

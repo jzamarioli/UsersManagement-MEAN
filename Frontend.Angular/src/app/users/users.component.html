@@ -1,0 +1,80 @@
+<a class="float-right" onclick="return false;" href="#" (click)="openLogoutModal(logouttemplate)">logout</a>              
+<br />
+<button type="button" class="btn btn-primary float-right" style="margin-top: 1%" (click)="openUserFormModal(null)">New user</button>
+<br />
+<br />
+<br />
+
+<form>
+<table class="table table-hover">
+    <thead>
+        <tr class="alert-secondary">                        
+            <th>Name</th>
+            <th>Username</th>
+            <th>E-mail</th>
+            <th>Role</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>        
+        <tr *ngFor="let user of users">          
+            <td>{{ user.name }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.role }}</td>
+            <td>              
+                <a onclick="return false;" href="#" (click)="openUserFormModal(user._id)" title="Edit"><i class="fa fa-edit"></i></a>                               
+            </td>        
+            <td>              
+                <a onclick="return false;" href="#" (click)="openDeleteModal(deletetemplate, user._id, user.username)" title="Delete"><i class="fa fa-remove"></i></a>
+            </td>        
+        </tr>    
+    </tbody>  
+</table>
+<div *ngIf="errors" class="alert alert-danger">
+    There was some errors processing your request. 
+    <br />
+    {{ errors }}
+</div>
+</form>
+
+
+<!-- Logout template Modal  -->
+<ng-template #logouttemplate>
+    <div class="modal-header" >
+        <h4 class="modal-title pull-left">Confirmation</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="closePopUp()">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <div class="modal-body">    
+            Are you sure you want to logout now? 
+    </div>
+
+    <div class="modal-footer">        
+        <button class="btn btn-primary" (click)="logout()">Yes</button>
+        <button class="btn btn-default" (click)="closePopUp()">No</button>        
+    </div>
+</ng-template>
+
+
+<!-- Delete template Modal  -->
+<ng-template #deletetemplate>
+    <div class="modal-header" >
+        <h4 class="modal-title pull-left">Confirmation</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="closePopUp()">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <div class="modal-body">    
+            Are you sure you want to delete {{usernametodelete}}? 
+    </div>
+
+    <div class="modal-footer">        
+        <button class="btn btn-primary" (click)="deleteUser()">Yes</button>
+        <button class="btn btn-default" (click)="closePopUp()">No</button>        
+    </div>
+</ng-template>

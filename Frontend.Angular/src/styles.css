@@ -1,0 +1,11 @@
+/* You can add global styles to this file, and also import other style files */
+
+.boxDiv {  
+    z-index: 10;              
+    position: absolute;
+    height:98%;
+    width: 99%;
+    margin: 0.5% 0.5% 0.5% 0.5%;
+    background: white;  
+    overflow: auto;
+}  
